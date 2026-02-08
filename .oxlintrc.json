@@ -14,7 +14,7 @@
     },
     "react": {
       "formComponents": [],
-      "linkComponents": [],
+      "linkComponents": [{ "name": "Link", "attribute": "to" }],
       "version": null,
       "componentWrapperFunctions": []
     },
