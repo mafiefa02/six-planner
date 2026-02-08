@@ -1,0 +1,10 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "ignorePatterns": ["pnpm-lock.yaml", ".vscode/", ".zed/", ".tanstack/", "src/routeTree.gen.ts"],
+  "experimentalTailwindcss": {
+    "stylesheet": "src/styles.css",
+    "attributes": ["class", "className"],
+    "functions": ["clsx", "cn", "twMerge", "cva"],
+    "preserveWhitespace": true
+  }
+}
