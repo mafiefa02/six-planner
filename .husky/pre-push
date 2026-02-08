@@ -1,1 +1,1 @@
-pnpm test --passWithNoTests --watch=false
+pnpm test --passWithNoTests --watch=false --teardown-timeout=0
