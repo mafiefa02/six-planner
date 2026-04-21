@@ -3,6 +3,6 @@
   "sortImports": true,
   "jsdoc": true,
   "singleAttributePerLine": true,
-  "sortTailwindcss": true,
+  "sortTailwindcss": { "functions": ["cn"] },
   "ignorePatterns": ["**/routeTree.gen.ts", "**/pnpm-lock.yaml"]
 }
