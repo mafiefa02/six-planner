@@ -4,6 +4,8 @@ import { ReactQueryDevtoolsPanel } from "@tanstack/react-query-devtools";
 import { HeadContent, Scripts, createRootRouteWithContext } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
+import { TooltipProvider } from "#/components/ui/tooltip";
+
 import appCss from "../styles.css?url";
 
 interface RouterContext {
@@ -32,7 +34,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        {children}
+        <TooltipProvider>{children}</TooltipProvider>
         <TanStackDevtools
           config={{ position: "bottom-right", hideUntilHover: true }}
           plugins={[
