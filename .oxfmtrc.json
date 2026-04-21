@@ -4,5 +4,5 @@
   "jsdoc": true,
   "singleAttributePerLine": true,
   "sortTailwindcss": { "functions": ["cn"] },
-  "ignorePatterns": ["**/routeTree.gen.ts", "**/pnpm-lock.yaml"]
+  "ignorePatterns": ["**/routeTree.gen.ts", "**/pnpm-lock.yaml", "**/skills-lock.json"]
 }
