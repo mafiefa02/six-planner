@@ -14,7 +14,7 @@
     "**/.classpath",
     "**/.settings"
   ],
-  "read_only_files": ["**/routeTree.gen.ts", "**/pnpm-lock.yaml"],
+  "read_only_files": ["**/routeTree.gen.ts", "**/pnpm-lock.yaml", "**/skills-lock.json"],
   "format_on_save": "on",
   "languages": {
     "JavaScript": {
