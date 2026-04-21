@@ -1,0 +1,40 @@
+{
+  "file_scan_exclusions": [
+    "**/dist",
+    "**/.tanstack",
+    "**/node_modules",
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/.jj",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/.classpath",
+    "**/.settings"
+  ],
+  "read_only_files": ["**/routeTree.gen.ts", "**/pnpm-lock.yaml"],
+  "format_on_save": "on",
+  "languages": {
+    "JavaScript": {
+      "formatter": {
+        "language_server": { "name": "oxfmt" }
+      }
+    },
+    "TypeScript": {
+      "formatter": {
+        "language_server": { "name": "oxfmt" }
+      }
+    },
+    "TSX": {
+      "formatter": {
+        "language_server": { "name": "oxfmt" }
+      }
+    },
+    "JSON": {
+      "formatter": {
+        "language_server": { "name": "oxfmt" }
+      }
+    }
+  }
+}
