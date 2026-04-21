@@ -1,3 +1,4 @@
 export default {
-  "*": "oxlint --fix && oxfmt",
+  "*.{js,jsx,ts,tsx,mjs,cjs}": "pnpm run lint",
+  "*": "pnpm run fmt",
 };
