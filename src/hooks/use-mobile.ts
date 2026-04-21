@@ -13,7 +13,7 @@ export function useIsMobile(mobileBreakpoint: number = DEFAULT_MOBILE_BREAKPOINT
     mql.addEventListener("change", onChange);
     setIsMobile(window.innerWidth < mobileBreakpoint);
     return () => mql.removeEventListener("change", onChange);
-  }, []);
+  }, [mobileBreakpoint]);
 
   return !!isMobile;
 }
