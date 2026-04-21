@@ -1,25 +1,17 @@
-import { useRouter } from "@tanstack/react-router";
-import { createContext, type PropsWithChildren, use } from "react";
+import { createContext, type PropsWithChildren } from "react";
+import { z } from "zod";
 
-import { setThemeServerFn, type T as Theme } from "#/lib/theme";
+export const postThemeValidator = z.union([z.literal("light"), z.literal("dark")]);
+export type Theme = z.infer<typeof postThemeValidator>;
+export const themeStorageKey = "_six-planner-theme";
 
-type ThemeContextVal = { theme: Theme; setTheme: (val: Theme) => void };
+// TODO: We should properly type `setTheme` here. Probably need to
+// consult to TanStack Start's docs.
+type ThemeContextVal = { theme: Theme };
 type Props = PropsWithChildren<{ theme: Theme }>;
 
-const ThemeContext = createContext<ThemeContextVal | null>(null);
+export const ThemeContext = createContext<ThemeContextVal | null>(null);
 
 export function ThemeProvider({ children, theme }: Props) {
-  const router = useRouter();
-
-  function setTheme(val: Theme) {
-    setThemeServerFn({ data: val }).then(() => router.invalidate());
-  }
-
-  return <ThemeContext value={{ theme, setTheme }}>{children}</ThemeContext>;
-}
-
-export function useTheme() {
-  const val = use(ThemeContext);
-  if (!val) throw new Error("useTheme called outside of ThemeProvider!");
-  return val;
+  return <ThemeContext value={{ theme }}>{children}</ThemeContext>;
 }

@@ -1,15 +1,21 @@
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import type { QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtoolsPanel } from "@tanstack/react-query-devtools";
-import { HeadContent, Scripts, createRootRouteWithContext } from "@tanstack/react-router";
+import {
+  HeadContent,
+  Scripts,
+  createRootRouteWithContext,
+  type ErrorComponentProps,
+  type NotFoundRouteProps,
+} from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-import { getCookie } from "@tanstack/react-start/server";
 
 import { RootSidebar } from "#/components/root-sidebar";
 import { ThemeProvider } from "#/components/theme-provider";
-import { SIDEBAR_COOKIE_NAME, SidebarInset, SidebarProvider } from "#/components/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "#/components/ui/sidebar";
 import { TooltipProvider } from "#/components/ui/tooltip";
-import { getThemeServerFn } from "#/lib/theme";
+import { getSidebarServerStateFn } from "#/lib/sidebar.functions";
+import { getThemeServerFn } from "#/lib/theme.functions";
 
 import appCss from "../styles.css?url";
 
@@ -31,14 +37,16 @@ export const Route = createRootRouteWithContext<RouterContext>()({
   }),
   loader: async () => {
     const theme = await getThemeServerFn();
-    const sidebarState = getCookie(SIDEBAR_COOKIE_NAME) === "true";
-    return { theme, sidebarState };
+    const isSidebarOpen = await getSidebarServerStateFn();
+    return { theme, isSidebarOpen };
   },
   shellComponent: RootDocument,
+  notFoundComponent: NotFoundComponent,
+  errorComponent: ErrorComponent,
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-  const { theme, sidebarState } = Route.useLoaderData();
+  const { theme, isSidebarOpen } = Route.useLoaderData();
   return (
     <html
       className={theme}
@@ -50,7 +58,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <body>
         <ThemeProvider theme={theme}>
           <TooltipProvider>
-            <SidebarProvider defaultOpen={sidebarState}>
+            <SidebarProvider defaultOpen={isSidebarOpen}>
               <RootSidebar />
               <SidebarInset>{children}</SidebarInset>
             </SidebarProvider>
@@ -73,4 +81,12 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </body>
     </html>
   );
+}
+
+function NotFoundComponent(props: NotFoundRouteProps) {
+  return <div {...props}>This page is not found!</div>;
+}
+
+function ErrorComponent(props: ErrorComponentProps) {
+  return <div {...props}>Something went wrong when loading this page!</div>;
 }
